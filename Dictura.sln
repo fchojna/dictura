@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dictura.Application", "Dict
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dictura.Infrastructure", "Dictura.Infrastructure\Dictura.Infrastructure.csproj", "{72AE4209-2698-4B6B-B96E-6E7ACC679885}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dictura.WebUI", "Dictura.WebUI\Dictura.WebUI\Dictura.WebUI.csproj", "{87E9C97C-F709-4E74-9888-958B6CFE3368}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dictura.WebUI", "Dictura.WebUI\Dictura.WebUI.csproj", "{87E9C97C-F709-4E74-9888-958B6CFE3368}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dictura.WebUI.Client", "Dictura.WebUI\Dictura.WebUI.Client\Dictura.WebUI.Client.csproj", "{E65B42B5-680A-4779-AF81-75F86548406E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dictura.WebUI.Client", "Dictura.WebUI.Client\Dictura.WebUI.Client.csproj", "{E65B42B5-680A-4779-AF81-75F86548406E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
