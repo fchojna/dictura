@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35312.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dictura.Domain", "Dictura.Domain\Dictura.Domain.csproj", "{2BE0894A-DED1-4083-A7C5-8CF657C2934D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dictura.Application", "Dictura.Application\Dictura.Application.csproj", "{FEAD17EF-EC31-4962-AF92-B2CA8249B78B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dictura.Infrastructure", "Dictura.Infrastructure\Dictura.Infrastructure.csproj", "{72AE4209-2698-4B6B-B96E-6E7ACC679885}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dictura.WebUI", "Dictura.WebUI\Dictura.WebUI.csproj", "{87E9C97C-F709-4E74-9888-958B6CFE3368}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dictura.WebUI.Client", "Dictura.WebUI.Client\Dictura.WebUI.Client.csproj", "{E65B42B5-680A-4779-AF81-75F86548406E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2BE0894A-DED1-4083-A7C5-8CF657C2934D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BE0894A-DED1-4083-A7C5-8CF657C2934D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BE0894A-DED1-4083-A7C5-8CF657C2934D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BE0894A-DED1-4083-A7C5-8CF657C2934D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEAD17EF-EC31-4962-AF92-B2CA8249B78B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEAD17EF-EC31-4962-AF92-B2CA8249B78B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEAD17EF-EC31-4962-AF92-B2CA8249B78B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEAD17EF-EC31-4962-AF92-B2CA8249B78B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72AE4209-2698-4B6B-B96E-6E7ACC679885}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72AE4209-2698-4B6B-B96E-6E7ACC679885}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72AE4209-2698-4B6B-B96E-6E7ACC679885}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72AE4209-2698-4B6B-B96E-6E7ACC679885}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87E9C97C-F709-4E74-9888-958B6CFE3368}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87E9C97C-F709-4E74-9888-958B6CFE3368}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87E9C97C-F709-4E74-9888-958B6CFE3368}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87E9C97C-F709-4E74-9888-958B6CFE3368}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E65B42B5-680A-4779-AF81-75F86548406E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E65B42B5-680A-4779-AF81-75F86548406E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E65B42B5-680A-4779-AF81-75F86548406E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E65B42B5-680A-4779-AF81-75F86548406E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {99032FE9-2649-4DBD-955C-E26A6013CD50}
+	EndGlobalSection
+EndGlobal
