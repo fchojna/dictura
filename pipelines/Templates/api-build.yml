@@ -1,0 +1,30 @@
+jobs:
+  - job: ApiBuildJob
+    displayName: API Build
+    steps:
+      - checkout: self
+
+      - task: UseDotNet@2
+        inputs:
+          packageType: sdk
+          version: $(dotnetVersion)
+        displayName: Use .NET 8          
+
+      - task: DotNetCoreCLI@2
+        inputs:
+          command: restore
+          projects: $(apiProjects)
+        displayName: Restore NuGet Packages
+
+      - task: DotNetCoreCLI@2
+        inputs:
+          command: build
+          projects: $(apiProjects)
+          arguments: --configuration $(apiBuildConfiguration) --output $(Build.BinariesDirectory)
+        displayName: Build Project
+
+      - task: PublishBuildArtifacts@1
+        inputs:
+          artifactName: api-drop
+          pathToPublish: $(Build.BinariesDirectory)
+        displayName: Publish Build Artifacts

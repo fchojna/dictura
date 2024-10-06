@@ -1,0 +1,95 @@
+trigger: none
+
+parameters:
+- name: versionBumpLevel
+  displayName: Bump Level
+  type: string
+  default: Patch
+  values:
+  - Major
+  - Minor
+  - Patch
+
+pool:
+  vmImage: ubuntu-latest
+
+jobs:
+- job: VersionBumpJob
+  displayName: Version Bump Job
+  steps:
+  - script: |
+      # Split the version string into components
+      VERSION=$(jq -r .version version.json)
+      IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
+
+      echo "MAJOR: $MAJOR"
+      echo "MINOR: $MINOR"
+      echo "PATCH: $PATCH"
+
+      OLD_VERSION=v$MAJOR.$MINOR.$PATCH
+
+      if [[ '${{ parameters.versionBumpLevel }}' == 'Major' ]]; then
+        MAJOR=$((MAJOR + 1))
+        MINOR=0
+        PATCH=0
+      elif [[ '${{ parameters.versionBumpLevel }}' == 'Minor' ]]; then
+        MINOR=$((MINOR + 1))
+        PATCH=0
+      else
+        PATCH=$((PATCH + 1))
+      fi
+
+      NEW_VERSION=v$MAJOR.$MINOR.$PATCH
+      
+      # Print bumped version
+      echo "$OLD_VERSION --> $NEW_VERSION"
+      
+      # Set them as pipeline variables
+      echo "##vso[task.setvariable variable=major;]$MAJOR"
+      echo "##vso[task.setvariable variable=minor;]$MINOR"
+      echo "##vso[task.setvariable variable=patch;]$PATCH"
+    displayName: Bump build version
+
+  - script: echo "##vso[build.updatebuildnumber]$(major).$(minor).$(patch)"
+    displayName: Set build name
+
+  - task: PowerShell@2
+    inputs:
+      targetType: filePath
+      filePath: Pipelines/Scripts/update-version-json.ps1
+      arguments: -filePath "version.json" -version "$(major).$(minor).$(patch)"
+    displayName: Update version.json
+
+  - task: PowerShell@2
+    inputs:
+      targetType: filePath
+      filePath: Pipelines/Scripts/update-version-yaml.ps1
+      arguments: -filePath "Pipelines/dev-ci-trigger.yml" -major "$(major)" -minor "$(minor)" -patch "$(patch)"
+    displayName: Update dev-ci-trigger.yml
+
+  - script: |
+      git remote add devops https://$(GIT_USERNAME):$(AZURE_TOKEN)@dev.azure.com/fchojna/Dictura/_git/Dictura
+      git fetch devops development
+      git checkout devops/development
+      
+      git config --global user.email "$(GIT_EMAIL)"
+      git config --global user.name "$(GIT_USERNAME)"
+
+      git add .
+      git commit -m "Bump version to $(major).$(minor).$(patch)"
+      git tag v$(major).$(minor).$(patch)
+      
+      git push devops HEAD:development --force-with-lease
+      git push devops HEAD:development --tags
+      git push devops HEAD:master --force
+    env:
+      AZURE_TOKEN: $(AZURE_TOKEN)
+      GIT_USERNAME: $(GIT_USERNAME)
+      GIT_EMAIL: $(GIT_EMAIL)
+    displayName: Push changes and tag
+      
+- job: GithubMirrorJob
+  displayName: GitHub Mirror Job
+  dependsOn: VersionBumpJob
+  steps:
+    - template: Templates/push-to-github.yml

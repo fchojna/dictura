@@ -1,0 +1,23 @@
+jobs:
+  - job: Versioning
+    displayName: Versioning
+    steps:
+      - script: |
+          # Split the version string into components
+          IFS='.' read -r MAJOR MINOR PATCH BUILD <<< "$(resources.pipeline.devCiTriggerPipeline.runName)"
+
+          # Output parsed components
+          echo "Parsed Major: $MAJOR"
+          echo "Parsed Minor: $MINOR"
+          echo "Parsed Patch: $PATCH"
+          echo "Parsed Build: $BUILD"
+
+          # Set them as pipeline variables
+          echo "##vso[task.setvariable variable=major;]$MAJOR"
+          echo "##vso[task.setvariable variable=minor;]$MINOR"
+          echo "##vso[task.setvariable variable=patch;]$PATCH"
+          echo "##vso[task.setvariable variable=build;]$BUILD"
+        displayName: Parse Version
+      
+      - script: echo "##vso[build.updatebuildnumber]Dictura-DEV-$(major).$(minor).$(patch).$(build)"
+        displayName: Set Build Name

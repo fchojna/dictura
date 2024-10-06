@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dictura.Application\Dictura.Application.csproj" />
+    <ProjectReference Include="..\Dictura.Domain\Dictura.Domain.csproj" />
+    <ProjectReference Include="..\Dictura.Infrastructure\Dictura.Infrastructure.csproj" />
+    
+  </ItemGroup>
+
+</Project>

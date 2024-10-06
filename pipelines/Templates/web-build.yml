@@ -1,0 +1,24 @@
+jobs:
+  - job: WebBuildJob
+    displayName: Web Project Build
+    steps:
+      - checkout: self
+      
+      - task: NodeTool@0
+        inputs:
+          versionSpec: $(nodeVersion)
+        displayName: Install Node.js
+
+      - script: npm install -g @angular/cli
+        displayName: Install Angular CLI
+
+      - script: cd Web; npm install
+        displayName: Install Dependencies
+
+      - script: cd Web; ng build --configuration $(webBuildConfiguration)
+        displayName: Build Angular Project
+
+      - task: PublishBuildArtifacts@1
+        inputs:
+          pathToPublish: 'Web/dist'
+          artifactName: 'web-drop'

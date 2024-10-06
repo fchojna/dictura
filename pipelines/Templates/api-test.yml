@@ -1,0 +1,24 @@
+jobs:
+  - job: ApiTestJob
+    displayName: API Tests
+    dependsOn: ApiBuildJob
+    condition: succeeded()
+    steps:
+      - task: DownloadPipelineArtifact@2
+        inputs:
+          artifact: api-drop
+          path: '$(Build.ArtifactStagingDirectory)'
+        displayName: Download Build Artifacts
+      
+      - task: UseDotNet@2
+        inputs:
+          packageType: sdk
+          version: $(dotnetVersion)
+          displayName: Use .NET 8
+
+      - task: DotNetCoreCLI@2
+        inputs:
+          command: test
+          projects: $(apiProjects)
+          arguments: --configuration $(apiBuildConfiguration)
+        displayName: Run Tests

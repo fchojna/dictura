@@ -1,0 +1,48 @@
+trigger: none
+
+resources:
+  pipelines:
+    - pipeline: devCiTriggerPipeline
+      source: Dictura_DEV_CI_Trigger
+      trigger:
+        branches:
+          include:
+            - development
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  apiProjects: '**/*.csproj'
+  apiBuildConfiguration: 'Release'
+  webBuildConfiguration: 'production'
+  dotnetVersion: '8.x'
+  nodeVersion: '22.x'
+
+stages:
+  - stage: Initialize
+    displayName: Initialize
+    jobs:
+      - template: Templates/versioning.yml
+      
+      - template: Templates/check-for-changes.yml
+      
+      - job: GithubMirrorJob
+        displayName: GitHub Mirror Job
+        steps:
+          - template: Templates/push-to-github.yml
+
+  - stage: ApiCi
+    displayName: API CI
+    dependsOn: Initialize
+    condition: eq(dependencies.Initialize.outputs['CheckForChanges.DetectApiChanges.result'], 'true')
+    jobs:
+      - template: Templates/api-build.yml
+      - template: Templates/api-test.yml
+
+  - stage: WebCi
+    displayName: Web CI
+    dependsOn: Initialize
+    condition: eq(dependencies.Initialize.outputs['CheckForChanges.DetectWebChanges.result'], 'true')
+    jobs:
+      - template: Templates/web-build.yml

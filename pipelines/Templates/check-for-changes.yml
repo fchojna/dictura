@@ -1,0 +1,32 @@
+jobs:
+  - job: CheckForChanges
+    displayName: Check For Changes
+    steps:
+      - checkout: self
+        fetchDepth: 0
+      
+      - script: |
+          echo "Checking for changes in API directory..."
+          CHANGED_FILES=$(git diff --name-only HEAD~ HEAD)
+          if echo "$CHANGED_FILES" | grep -q '^Api/'; then
+              echo "##vso[task.setvariable variable=result;isOutput=true]true"
+              echo "Result: true"
+          else
+              echo "##vso[task.setvariable variable=result;isOutput=true]false"
+              echo "Result: false (API CI stage will be skipped)"
+          fi
+        name: DetectApiChanges
+        displayName: Detect API Changes
+      
+      - script: |
+          echo "Checking for changes in Web directory..."
+          CHANGED_FILES=$(git diff --name-only HEAD~ HEAD)
+          if echo "$CHANGED_FILES" | grep -q '^Web/'; then
+              echo "##vso[task.setvariable variable=result;isOutput=true]true"
+              echo "Result: true"
+          else
+              echo "##vso[task.setvariable variable=result;isOutput=true]false"
+              echo "Result: false (Web CI stage will be skipped)"
+          fi
+        name: DetectWebChanges
+        displayName: Detect Web Changes
