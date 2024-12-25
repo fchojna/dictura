@@ -1,7 +1,9 @@
 steps:
   - script: |
+      echo "https://$(GIT_USERNAME):$(AZURE_TOKEN)@dev.azure.com/ADHDevs/Projects/_git/Dictura"
+      echo "https://$(GIT_USERNAME):$(GITHUB_TOKEN)@github.com/fchojna/dictura.git"
       git remote remove origin
-      git remote add devops https://$(GIT_USERNAME):$(AZURE_TOKEN)@dev.azure.com/fchojna/Dictura/_git/Dictura
+      git remote add devops https://$(GIT_USERNAME):$(AZURE_TOKEN)@dev.azure.com/ADHDevs/Projects/_git/Dictura
       git remote add github https://$(GIT_USERNAME):$(GITHUB_TOKEN)@github.com/fchojna/dictura.git
       git fetch --all
       git checkout devops/development
@@ -9,7 +11,7 @@ steps:
       git config --global user.email "$(GIT_EMAIL)"
       git config --global user.name "$(GIT_USERNAME)"
 
-      git push github HEAD:development --force --verbose
+      git push github HEAD:master --force --verbose
     env:
       GITHUB_TOKEN: $(GITHUB_TOKEN)
       AZURE_TOKEN: $(AZURE_TOKEN)
