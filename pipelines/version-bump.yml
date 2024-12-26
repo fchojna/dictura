@@ -56,15 +56,15 @@ jobs:
   - task: PowerShell@2
     inputs:
       targetType: filePath
-      filePath: Pipelines/Scripts/update-version-json.ps1
+      filePath: pipelines/scripts/update-version-json.ps1
       arguments: -filePath "version.json" -version "$(major).$(minor).$(patch)"
     displayName: Update version.json
 
   - task: PowerShell@2
     inputs:
       targetType: filePath
-      filePath: Pipelines/Scripts/update-version-yaml.ps1
-      arguments: -filePath "Pipelines/dev-ci-trigger.yml" -major "$(major)" -minor "$(minor)" -patch "$(patch)"
+      filePath: pipelines/scripts/update-version-yaml.ps1
+      arguments: -filePath "pipelines/dev-ci-trigger.yml" -major "$(major)" -minor "$(minor)" -patch "$(patch)"
     displayName: Update dev-ci-trigger.yml
 
   - script: |
@@ -92,4 +92,4 @@ jobs:
   displayName: GitHub Mirror Job
   dependsOn: VersionBumpJob
   steps:
-    - template: Templates/push-to-github.yml
+    - template: templates/push-to-github.yml

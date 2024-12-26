@@ -15,7 +15,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddControllers();
 
-//Configure CosmosDB client
+//Configure CosmosDB client 
 builder.Services.AddScoped<CosmosClient>(_ =>
 {
     const string connectionStringName = "DOCDBCONNSTR_CosmosDbConnection";

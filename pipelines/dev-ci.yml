@@ -23,26 +23,26 @@ stages:
   - stage: Initialize
     displayName: Initialize
     jobs:
-      - template: Templates/versioning.yml
+      - template: templates/versioning.yml
       
-      - template: Templates/check-for-changes.yml
+      - template: templates/check-for-changes.yml
       
       - job: GithubMirrorJob
         displayName: GitHub Mirror Job
         steps:
-          - template: Templates/push-to-github.yml
+          - template: templates/push-to-github.yml
 
   - stage: ApiCi
     displayName: API CI
     dependsOn: Initialize
     condition: eq(dependencies.Initialize.outputs['CheckForChanges.DetectApiChanges.result'], 'true')
     jobs:
-      - template: Templates/api-build.yml
-      - template: Templates/api-test.yml
+      - template: templates/api-build.yml
+      - template: templates/api-test.yml
 
   - stage: WebCi
     displayName: Web CI
     dependsOn: Initialize
     condition: eq(dependencies.Initialize.outputs['CheckForChanges.DetectWebChanges.result'], 'true')
     jobs:
-      - template: Templates/web-build.yml
+      - template: templates/web-build.yml

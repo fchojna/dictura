@@ -12,13 +12,13 @@ jobs:
       - script: npm install -g @angular/cli
         displayName: Install Angular CLI
 
-      - script: cd Web; npm install
+      - script: cd ui; npm install
         displayName: Install Dependencies
 
-      - script: cd Web; ng build --configuration $(webBuildConfiguration)
+      - script: cd ui; ng build --configuration $(webBuildConfiguration)
         displayName: Build Angular Project
 
       - task: PublishBuildArtifacts@1
         inputs:
-          pathToPublish: 'Web/dist'
+          pathToPublish: 'ui/dist'
           artifactName: 'web-drop'
