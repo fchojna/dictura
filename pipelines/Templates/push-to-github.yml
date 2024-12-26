@@ -1,7 +1,5 @@
 steps:
   - script: |
-      echo "https://$(GIT_USERNAME):$(AZURE_TOKEN)@dev.azure.com/ADHDevs/Projects/_git/Dictura"
-      echo "https://$(GIT_USERNAME):$(GITHUB_TOKEN)@github.com/fchojna/dictura.git"
       git remote remove origin
       git remote add devops https://$(GIT_USERNAME):$(AZURE_TOKEN)@dev.azure.com/ADHDevs/Projects/_git/Dictura
       git remote add github https://$(GIT_USERNAME):$(GITHUB_TOKEN)@github.com/fchojna/dictura.git
