@@ -68,7 +68,7 @@ jobs:
     displayName: Update dev-ci-trigger.yml
 
   - script: |
-      git remote add devops https://$(GIT_USERNAME):$(AZURE_TOKEN)@dev.azure.com/fchojna/Dictura/_git/Dictura
+      git remote add devops https://$(GIT_USERNAME):$(AZURE_TOKEN)@dev.azure.com/ADHDevs/Projects/_git/Dictura
       git fetch devops development
       git checkout devops/development
       
