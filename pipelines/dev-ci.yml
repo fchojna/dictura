@@ -39,6 +39,7 @@ stages:
     jobs:
       - template: templates/api-build.yml
       - template: templates/api-test.yml
+      - template: templates/api-publish.yml
 
   - stage: WebCi
     displayName: Web CI
