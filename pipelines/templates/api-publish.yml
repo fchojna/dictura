@@ -1,15 +1,17 @@
 jobs:
   - job: ApiPublishJob
     displayName: API Publish
+    dependsOn: ApiTestJob
+    condition: succeeded()
     steps:
       - checkout: self
 
       - task: Docker@2
         displayName: Build container and publish to ACR
         inputs:
-          containerRegistry: 'adhdevs.azurecr.io'
-          repository: 'dictura-api'
-          command: 'buildAndPush'
-          Dockerfile: '**/api/Dictura.Api/Dockerfile'
-          buildContext: '**/api'
-          tags: 'dev'
+          containerRegistry: adhdevs.azurecr.io
+          repository: dictura-api
+          command: buildAndPush
+          Dockerfile: $(System.DefaultWorkingDirectory)/api/Dictura.Api/Dockerfile
+          buildContext: $(System.DefaultWorkingDirectory)/api
+          tags: dev

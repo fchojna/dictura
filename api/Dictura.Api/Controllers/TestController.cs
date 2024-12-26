@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Cosmos;
+using Newtonsoft.Json;
 
 namespace Dictura.Api.Controllers;
 
@@ -7,10 +8,7 @@ namespace Dictura.Api.Controllers;
 public class TestController(CosmosClient cosmosClient) : ControllerBase
 {
     [HttpGet("echo")]
-    public IActionResult Echo()
-    {
-        return Ok("echo");
-    }
+    public IActionResult Echo() => Ok("echo");
 
     [HttpGet("db")]
     public async Task<IActionResult> TestDb()
@@ -25,5 +23,14 @@ public class TestController(CosmosClient cosmosClient) : ControllerBase
         var item = response.Resource;
 
         return Ok(new { environment = item.env.ToString() });
+    }
+
+    [HttpGet("version")]
+    public async Task<IActionResult> GetVersion()
+    {
+        using StreamReader reader = new("../../version.json");
+        var versionJson= await reader.ReadToEndAsync();
+
+        return Ok(versionJson);
     }
 }
