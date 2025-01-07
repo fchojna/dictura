@@ -19,7 +19,7 @@ jobs:
   steps:
   - script: |
       # Split the version string into components
-      VERSION=$(jq -r .version version.json)
+      VERSION=$(jq -r .version api/version.json)
       IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
 
       echo "MAJOR: $MAJOR"
@@ -57,7 +57,7 @@ jobs:
     inputs:
       targetType: filePath
       filePath: pipelines/scripts/update-version-json.ps1
-      arguments: -filePath "version.json" -version "$(major).$(minor).$(patch)"
+      arguments: -filePath "api/version.json" -version "$(major).$(minor).$(patch)"
     displayName: Update version.json
 
   - task: PowerShell@2

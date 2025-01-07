@@ -14,6 +14,7 @@ COPY ["Dictura.Application/Dictura.Application.csproj", "Dictura.Application/"]
 COPY ["Dictura.Domain/Dictura.Domain.csproj", "Dictura.Domain/"]
 COPY ["Dictura.Infrastructure/Dictura.Infrastructure.csproj", "Dictura.Infrastructure/"]
 RUN dotnet restore "./Dictura.Api/Dictura.Api.csproj"
+COPY version.json ./version.json
 COPY . .
 WORKDIR "/src/Dictura.Api"
 RUN dotnet build "./Dictura.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
@@ -27,4 +28,5 @@ RUN dotnet publish "./Dictura.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publis
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+COPY --from=build /src/version.json ./version.json
 ENTRYPOINT ["dotnet", "Dictura.Api.dll"]

@@ -28,7 +28,8 @@ public class TestController(CosmosClient cosmosClient) : ControllerBase
     [HttpGet("version")]
     public async Task<IActionResult> GetVersion()
     {
-        using StreamReader reader = new("../../version.json");
+        var versionPath = Path.Combine(AppContext.BaseDirectory, "version.json");
+        using StreamReader reader = new(versionPath);
         var versionJson= await reader.ReadToEndAsync();
 
         return Ok(versionJson);
