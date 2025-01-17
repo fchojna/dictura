@@ -8,8 +8,8 @@ pool:
 
 variables:
   major: 0
-  minor: 0
-  patch: 1
+  minor: 1
+  patch: 0
   versionKey: $(major).$(minor).$(patch) # Key unique for major + minor + patch combination. Ensures that build number reset when any of them changes.
   build: $[counter(variables['versionKey'], 1)] # Incremented build number
 
