@@ -76,7 +76,7 @@ jobs:
       git config --global user.name "$(GIT_USERNAME)"
 
       git add .
-      git commit -m "Bump version to $(major).$(minor).$(patch)"
+      git commit -m "Bump version to $(major).$(minor).$(patch)  [skip ci]"
       git tag v$(major).$(minor).$(patch)
       
       git push devops HEAD:development --force-with-lease
