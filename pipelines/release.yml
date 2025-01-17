@@ -93,3 +93,5 @@ jobs:
   dependsOn: VersionBumpJob
   steps:
     - template: templates/push-to-github.yml
+
+- template: templates/api-publish-prod.yml

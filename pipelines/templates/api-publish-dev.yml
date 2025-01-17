@@ -1,6 +1,6 @@
 jobs:
-  - job: ApiPublishJob
-    displayName: API Publish
+  - job: ApiPublishDevJob
+    displayName: Publish API to DEV
     dependsOn: ApiTestJob
     condition: succeeded()
     steps:
