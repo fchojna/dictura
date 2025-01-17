@@ -4,7 +4,11 @@ jobs:
     dependsOn: VersionBumpJob
     condition: succeeded()
     steps:
-      - checkout: self
+      - script: |
+          git remote add devops https://$(GIT_USERNAME):$(AZURE_TOKEN)@dev.azure.com/ADHDevs/Projects/_git/Dictura
+          git fetch devops master
+          git checkout devops/master
+        displayName: Checkout master
 
       - task: Docker@2
         displayName: Build container and publish to ACR

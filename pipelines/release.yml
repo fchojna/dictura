@@ -77,21 +77,13 @@ jobs:
 
       git add .
       git commit -m "Bump version to $(major).$(minor).$(patch)  [skip ci]"
-      git tag v$(major).$(minor).$(patch)
       
       git push devops HEAD:development --force-with-lease
-      git push devops HEAD:development --tags
       git push devops HEAD:master --force
     env:
       AZURE_TOKEN: $(AZURE_TOKEN)
       GIT_USERNAME: $(GIT_USERNAME)
       GIT_EMAIL: $(GIT_EMAIL)
     displayName: Push changes and tag
-      
-- job: GithubMirrorJob
-  displayName: GitHub Mirror Job
-  dependsOn: VersionBumpJob
-  steps:
-    - template: templates/push-to-github.yml
 
 - template: templates/api-publish-prod.yml
