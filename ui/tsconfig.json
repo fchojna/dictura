@@ -61,9 +61,6 @@
       "@spartan-ng/ui-label-helm": [
         ".\\spartan/primitives/ui-label-helm/src/index.ts"
       ],
-      "@spartan-ng/ui-menu-helm": [
-        ".\\spartan/primitives/ui-menu-helm/src/index.ts"
-      ],
       "@spartan-ng/ui-progress-helm": [
         ".\\spartan/primitives/ui-progress-helm/src/index.ts"
       ],
@@ -87,6 +84,15 @@
       ],
       "@spartan-ng/ui-tooltip-helm": [
         ".\\spartan/primitives/ui-tooltip-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-menu-helm": [
+        ".\\spartan/primitives/ui-menu-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-aspectratio-helm": [
+        ".\\spartan/primitives/ui-aspectratio-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-popover-helm": [
+        ".\\spartan/primitives/ui-popover-helm/src/index.ts"
       ]
     }
   },
